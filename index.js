@@ -16,7 +16,9 @@ for (let i = 0; i < 100; i++) {
 }
 ;
 // make mines
-for (let i = 0; i < 15;) {
+let bombCount = 15;
+score.textContent = String(bombCount);
+for (let i = 0; i < bombCount;) {
     let nr = Math.floor(Math.random() * 100);
     if (grid[nr].mine === false) {
         grid[nr].mine = true;
@@ -26,8 +28,6 @@ for (let i = 0; i < 15;) {
 ;
 //calculate neighbors
 for (let i = 0; i < 100; i++) {
-    if (i % 10 === 0)
-        console.log(i);
     if (i % 10 !== 0) {
         if (grid[i - 1 - 10] && grid[i - 1 - 10].mine === true)
             grid[i].neighbors++;
@@ -50,6 +50,7 @@ for (let i = 0; i < 100; i++) {
         grid[i].neighbors++;
 }
 ;
+let defusedGrid = 100 - bombCount;
 for (let i = 0; i < 100; i++) {
     let div = document.createElement('div');
     div.classList.add('mine');
@@ -57,7 +58,7 @@ for (let i = 0; i < 100; i++) {
     mineField.append(div);
     div.onclick = (e) => {
         if (h1.textContent !== '💥DEATH💥') {
-            if (!e.ctrlKey) {
+            if (div.textContent !== '💣') {
                 if (grid[i].mine) {
                     div.style.backgroundColor = 'darkred';
                     div.textContent = '💥';
@@ -66,23 +67,27 @@ for (let i = 0; i < 100; i++) {
                     h1.innerHTML = '💥DEATH💥';
                 }
                 if (!grid[i].mine) {
+                    if (div.textContent === '')
+                        defusedGrid--;
                     div.textContent = String(grid[i].neighbors);
                 }
             }
-            if (e.ctrlKey) {
-                if (div.textContent === '') {
-                    div.textContent = '💣';
-                    score.textContent = String(Number(score.textContent) - 1);
-                }
-                else if (div.textContent === '💣') {
-                    div.textContent = '';
-                    score.textContent = String(Number(score.textContent) + 1);
-                }
-            }
-            if (score.textContent === '0')
+            if (defusedGrid === 0)
                 h1.innerHTML = 'VICTORY!!!🎉🎉🎉';
         }
     };
-    console.log(i);
+    div.oncontextmenu = (e) => {
+        e.preventDefault();
+        if (div.textContent === '') {
+            div.textContent = '💣';
+            score.textContent = String(Number(score.textContent) - 1);
+        }
+        else if (div.textContent === '💣') {
+            div.textContent = '';
+            score.textContent = String(Number(score.textContent) + 1);
+        }
+        if (defusedGrid === 0)
+            h1.innerHTML = 'VICTORY!!!🎉🎉🎉';
+    };
 }
 ;
