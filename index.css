@@ -38,3 +38,8 @@ div.mine {
     cursor: pointer;
     border-radius: 5px;
 }
+
+div.mine:hover {
+    background-color: rgb(208, 208, 208);
+    transform: scale(0.95);
+}
