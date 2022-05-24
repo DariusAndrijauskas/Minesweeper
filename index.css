@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+h1 {
+    text-shadow: rgb(0 0 0 / 30%) 7px 7px 11px;
+}
+div.container {
+    margin: 0 auto;
+    padding: 20px;
+    width: calc(500px + 2px + 40px);
+}
+
+div.mineField {
+    display: flex;
+    flex-flow: row wrap;
+    width: 502px;
+    height: 502px;
+    border: 1px solid rgb(96, 96, 96);
+    border-radius: 5px;
+    background-color: rgb(95, 95, 95);
+    box-shadow: rgb(0 0 0 / 20%) 7px 7px 29px 10px;
+}
+
+div.mine {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight:900;
+    font-size: 25px;
+    border: 1px solid rgb(148, 148, 148);
+    width: 50px;
+    height: 50px;
+    background-color: rgb(216, 216, 216);
+    cursor: pointer;
+    border-radius: 5px;
+}
