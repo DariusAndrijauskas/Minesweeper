@@ -4,6 +4,7 @@ let mineField = document.querySelector('.mineField');
 let score = document.querySelector('span');
 let h1 = document.querySelector('h1');
 let grid = [];
+let bombCount = 15;
 let defusedGrid = 100 - bombCount;
 for (let i = 0; i < 100; i++) {
     grid[i] = {
@@ -13,7 +14,6 @@ for (let i = 0; i < 100; i++) {
 }
 ;
 // make mines
-let bombCount = 15;
 score.textContent = String(bombCount);
 for (let i = 0; i < bombCount;) {
     let nr = Math.floor(Math.random() * 100);
